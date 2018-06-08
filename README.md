@@ -29,7 +29,7 @@ URLs so only clients that have your signing certificate can download content.
 ## Versions
 
 At this time, it is impossible to supply your own lambda payload as such you
-are suck on the following versions.
+are stuck on the following versions.
 
 * Munki - [v3.2.1]
 * Munki s3Repo Plugin - [0.4.4](https://github.com/clburlison/Munki-s3Repo-Plugin)
