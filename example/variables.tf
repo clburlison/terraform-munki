@@ -27,3 +27,4 @@ variable "s3_bucket_name" {
   description = "The s3 bucket name"
   default     = "clb-munki-repo-demo"
 }
+

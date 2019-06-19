@@ -1,14 +1,14 @@
 resource "aws_iam_user" "ci_user" {
-  name = "${var.ci_user_name}"
+  name = var.ci_user_name
 }
 
 resource "aws_iam_access_key" "ci_key" {
-  user = "${aws_iam_user.ci_user.name}"
+  user = aws_iam_user.ci_user.name
 }
 
 resource "aws_iam_user_policy" "ci_munki_s3_rw" {
-  name = "${aws_iam_user.ci_user.name}"
-  user = "${aws_iam_user.ci_user.name}"
+  name = aws_iam_user.ci_user.name
+  user = aws_iam_user.ci_user.name
 
   policy = <<EOF
 {
@@ -37,4 +37,6 @@ resource "aws_iam_user_policy" "ci_munki_s3_rw" {
     ]
 }
 EOF
+
 }
+

@@ -38,10 +38,10 @@ are stuck on the following versions.
 
 ```hcl
 module "munki-service" {
-  source = "git@github.com:clburlison/terraform-munki.git"
+  source = "git@github.com:clburlison/terraform-munki.git?ref=v1.1.0"
   s3_bucket_name = "megacorp-munki-repo"
 
-  tags {
+  tags = {
     Environment  = "prod"
     BusinessUnit = "ClientABC"
   }
