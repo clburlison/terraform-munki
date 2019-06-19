@@ -88,30 +88,29 @@ triggered from the following s3 events:
 If this setup is destroyed and recreated the 'munki-s3-rw' policy will need to be re-applied to the 'munki_s3' user.
 
 <!-- BEGINNING OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
-
 ## Inputs
 
 | Name | Description | Type | Default | Required |
 |------|-------------|:----:|:-----:|:-----:|
-| alarm_arn | The arn to send alerts to on lambda errors and warnings | string | `` | no |
-| cf_default_certificate | true if you want viewers to use HTTPS to request your objects and you're using the CloudFront domain name for your distribution. Specify this, cf_acm_certificate_arn, or cf_iam_certificate_id | string | `true` | no |
-| cf_dns_aliases | Optionally a list of dns aliases to assign to the CloudFront distribution point | list | `<list>` | no |
-| cf_minimum_protocol_version | The minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. One of SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016 or TLSv1.2_2018 | string | `TLSv1.2_2018` | no |
-| cf_price_class | The CloudFront pricing tier. One of PriceClass_All, PriceClass_200, PriceClass_100 | string | `PriceClass_All` | no |
-| cf_ssl_cert_arn | The ARN of the AWS Certificate Manager certificate to use. Specify this, cf_cloudfront_default_certificate, or cf_iam_certificate_id. The ACM certificate must be in US-EAST-1 | string | `` | no |
-| cf_ssl_support_method | Specifies how you want CloudFront to serve HTTPS requests. Required if you specify acm_certificate_arn. One of vip or sni-only. vip is $600 a month don't select that option! | string | `` | no |
-| cf_trusted_signers | The AWS accounts, if any, that you want to allow to create signed URLs for private content. Use ['self'] if you want to target the account that owns this CloudFront distribution point | list | `<list>` | no |
-| name | Name to be used on all resources as the identifier | string | `munki` | no |
-| s3_bucket_create | Set to true to create a new s3 bucket. If false you can reuse a current bucket | string | `true` | no |
-| s3_bucket_name | The s3 bucket name to use | string | - | yes |
-| tags | A map of tags to add to all resources | map | `<map>` | no |
+| alarm\_arn | The arn to send alerts to on lambda errors and warnings | string | `""` | no |
+| cf\_default\_certificate | true if you want viewers to use HTTPS to request your objects and you're using the CloudFront domain name for your distribution. Specify this, cf_acm_certificate_arn, or cf_iam_certificate_id | string | `"true"` | no |
+| cf\_dns\_aliases | Optionally a list of dns aliases to assign to the CloudFront distribution point | list(string) | `[]` | no |
+| cf\_minimum\_protocol\_version | The minimum version of the SSL protocol that you want CloudFront to use for HTTPS connections. One of SSLv3, TLSv1, TLSv1_2016, TLSv1.1_2016 or TLSv1.2_2018 | string | `"TLSv1.2_2018"` | no |
+| cf\_price\_class | The CloudFront pricing tier. One of PriceClass_All, PriceClass_200, PriceClass_100 | string | `"PriceClass_All"` | no |
+| cf\_ssl\_cert\_arn | The ARN of the AWS Certificate Manager certificate to use. Specify this, cf_cloudfront_default_certificate, or cf_iam_certificate_id. The ACM certificate must be in US-EAST-1 | string | `""` | no |
+| cf\_ssl\_support\_method | Specifies how you want CloudFront to serve HTTPS requests. Required if you specify acm_certificate_arn. One of vip or sni-only. vip is $600 a month don't select that option! | string | `""` | no |
+| cf\_trusted\_signers | The AWS accounts, if any, that you want to allow to create signed URLs for private content. Use ['self'] if you want to target the account that owns this CloudFront distribution point | list(string) | `[]` | no |
+| name | Name to be used on all resources as the identifier | string | `"munki"` | no |
+| s3\_bucket\_create | Set to true to create a new s3 bucket. If false you can reuse a current bucket | string | `"true"` | no |
+| s3\_bucket\_name | The s3 bucket name to use | string | n/a | yes |
+| tags | A map of tags to add to all resources | map(string) | `{}` | no |
 
 ## Outputs
 
 | Name | Description |
 |------|-------------|
-| cf_domain_name | The cloudfront distribution point domain name |
-| cf_hosted_zone_id | The cloudfront distribution point zone id |
+| cf\_domain\_name | The cloudfront distribution point domain name |
+| cf\_hosted\_zone\_id | The cloudfront distribution point zone id |
 
 <!-- END OF PRE-COMMIT-TERRAFORM DOCS HOOK -->
 

@@ -23,13 +23,13 @@ variable "cf_default_certificate" {
 }
 
 variable "cf_dns_aliases" {
-  type        = "list"
+  type        = list(string)
   description = "Optionally a list of dns aliases to assign to the CloudFront distribution point"
   default     = []
 }
 
 variable "cf_trusted_signers" {
-  type        = "list"
+  type        = list(string)
   description = "The AWS accounts, if any, that you want to allow to create signed URLs for private content. Use ['self'] if you want to target the account that owns this CloudFront distribution point"
   default     = []
 }
@@ -55,7 +55,8 @@ variable "cf_ssl_support_method" {
 }
 
 variable "tags" {
-  type        = "map"
+  type        = map(string)
   description = "A map of tags to add to all resources"
   default     = {}
 }
+

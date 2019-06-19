@@ -30,4 +30,6 @@ resource "aws_iam_policy" "munki-s3-rw" {
   ]
 }
 EOF
+
 }
+
