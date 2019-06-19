@@ -3,3 +3,7 @@
   hooks:
     - id: terraform_fmt
     - id: terraform_docs
+- repo: git://github.com/pre-commit/pre-commit-hooks
+  rev: v2.2.3
+  hooks:
+    - id: check-merge-conflict
