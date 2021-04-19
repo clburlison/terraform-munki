@@ -28,3 +28,7 @@ variable "s3_bucket_name" {
   default     = "clb-munki-repo-demo"
 }
 
+variable "server_side_makecatalogs" {
+  description = "Set to true to enable server side makecatalogs when s3 bucket changes happen"
+  default     = false
+}
