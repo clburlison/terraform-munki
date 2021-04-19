@@ -16,15 +16,19 @@ URLs so only clients that have your signing certificate can download content.
 * [**Inputs**](#inputs)
 * [**Outputs**](#outputs)
 
+## NOTE
+
+Currently server side `makecatalogs` via the [s3 Repo Plugin](https://github.com/clburlison/Munki-s3Repo-Plugin) does not function with python3 and munki version 4+. I recommend you keep `server_side_makecatalogs` set to `false`.
+
 ## High Level Features
 
 * Restrictions on the S3 bucket to disallow any direct connections
 * Use a custom DNS name for the web server or use a supplied URL from AWS
-* Rebuild the catalog files whenever a pkginfo file or icon is updated or modified
+* ~~Rebuild the catalog files whenever a pkginfo file or icon is updated or modified~~ See Note above
 * Only pay for what you use
 * Optional SNS Alert when a warning or error happen during `makecatalog` run
-* Short 2 minute TTL values on catalogs/* and /icons/*.plist allow clients to get updates quickly
-* Long 24 hour TTL values on all other resources allow large packages to stay cached on the CDN
+* Custom TTL values for assets
+* Baisc Auth and Cert Based ACL controls
 
 ## Versions
 
@@ -46,6 +50,8 @@ module "munki-service" {
     BusinessUnit = "ClientABC"
   }
 }
+
+For additional instructions please checkout the [examples](./examples) directory.
 ```
 
 ## CloudFront signing key
@@ -165,7 +171,7 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | Name to be used on all resources as the identifier | `string` | `"munki"` | no |
 | <a name="input_s3_bucket_create"></a> [s3\_bucket\_create](#input\_s3\_bucket\_create) | Set to true to create a new s3 bucket. If false you can reuse a current bucket | `bool` | `true` | no |
 | <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | The s3 bucket name to use | `any` | n/a | yes |
-| <a name="input_server_side_makecatalogs"></a> [server\_side\_makecatalogs](#input\_server\_side\_makecatalogs) | Set to true to enable server side makecatalogs when s3 bucket changes happen | `bool` | `true` | no |
+| <a name="input_server_side_makecatalogs"></a> [server\_side\_makecatalogs](#input\_server\_side\_makecatalogs) | Set to true to enable server side makecatalogs when s3 bucket changes happen | `bool` | `false` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources | `map(string)` | `{}` | no |
 
 ## Outputs

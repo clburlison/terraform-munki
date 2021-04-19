@@ -29,7 +29,7 @@ variable "s3_bucket_create" {
 
 variable "server_side_makecatalogs" {
   description = "Set to true to enable server side makecatalogs when s3 bucket changes happen"
-  default     = true
+  default     = false
 }
 
 variable "cf_default_certificate" {
