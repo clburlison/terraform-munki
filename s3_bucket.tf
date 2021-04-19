@@ -19,7 +19,7 @@ resource "aws_s3_bucket" "munki-bucket" {
   lifecycle {
     # This can't be interpolationed as a variable. https://github.com/hashicorp/terraform/issues/3116
     # This bucket must be manually destroyed in the AWS console or via API for safety purposes.
-    prevent_destroy = true
+    prevent_destroy = false
   }
 
   tags = merge(
@@ -54,4 +54,3 @@ resource "aws_s3_bucket_notification" "bucket_notification" {
     filter_prefix       = "pkgsinfo/"
   }
 }
-

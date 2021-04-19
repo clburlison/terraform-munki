@@ -3,4 +3,5 @@
 *.tfstate.backup
 *.zip
 *.hcl
+*.info
 !lambda_payload.zip
