@@ -31,24 +31,25 @@ resource "aws_s3_bucket" "munki-bucket" {
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
+  count  = var.server_side_makecatalogs ? 1 : 0
   bucket = var.s3_bucket_name
 
   lambda_function {
-    lambda_function_arn = aws_lambda_function.lambda.arn
+    lambda_function_arn = aws_lambda_function.lambda[0].arn
     events              = ["s3:ObjectCreated:*", "s3:ObjectRemoved:*"]
     filter_prefix       = "icons/"
     filter_suffix       = ".png"
   }
 
   lambda_function {
-    lambda_function_arn = aws_lambda_function.lambda.arn
+    lambda_function_arn = aws_lambda_function.lambda[0].arn
     events              = ["s3:ObjectCreated:*", "s3:ObjectRemoved:*"]
     filter_prefix       = "icons/"
     filter_suffix       = ".jpg"
   }
 
   lambda_function {
-    lambda_function_arn = aws_lambda_function.lambda.arn
+    lambda_function_arn = aws_lambda_function.lambda[0].arn
     events              = ["s3:ObjectCreated:*", "s3:ObjectRemoved:*"]
     filter_prefix       = "pkgsinfo/"
   }

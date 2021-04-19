@@ -3,16 +3,21 @@ provider "aws" {
 }
 
 module "munki-service" {
-  source = "../"
+  source = "../../"
 
-  s3_bucket_name   = "${var.s3_bucket_name}-${random_id.code.hex}"
-  s3_bucket_create = true
+  basic_auth_user     = "admin"
+  basic_auth_password = "secretPassword"
 
   cf_default_certificate = false
   cf_dns_aliases         = [var.route53_record_name]
 
   cf_ssl_support_method = "sni-only"
   cf_ssl_cert_arn       = var.acm_certificate_arn
+
+  s3_bucket_name   = "${var.s3_bucket_name}-${random_id.code.hex}"
+  s3_bucket_create = true
+
+  server_side_makecatalogs = var.server_side_makecatalogs
 
   tags = {
     Environment = terraform.workspace
