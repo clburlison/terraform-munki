@@ -15,7 +15,7 @@ resource "aws_cloudfront_distribution" "munki" {
 
   enabled         = true
   is_ipv6_enabled = true
-  comment         = "Munki"
+  comment         = var.name
 
   aliases = var.cf_dns_aliases
 
@@ -165,7 +165,7 @@ resource "aws_cloudfront_distribution" "munki_basic_auth" {
 
   enabled         = true
   is_ipv6_enabled = true
-  comment         = "Munki"
+  comment         = var.name
 
   aliases = var.cf_dns_aliases
 
@@ -301,4 +301,3 @@ resource "aws_cloudfront_distribution" "munki_basic_auth" {
     ssl_support_method       = var.cf_ssl_support_method
   }
 }
-
