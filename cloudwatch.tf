@@ -1,5 +1,5 @@
 resource "aws_cloudwatch_log_group" "munki_makecatalogs" {
-  name              = "/aws/lambda/munki_makecatalogs"
+  name              = "/aws/lambda/${var.name}_makecatalogs"
   retention_in_days = "30"
 
   tags = merge(
@@ -65,4 +65,3 @@ resource "aws_cloudwatch_metric_alarm" "Makecatalogs-Error" {
   alarm_actions             = [var.alarm_arn]
   insufficient_data_actions = []
 }
-
