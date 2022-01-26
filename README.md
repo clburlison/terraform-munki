@@ -104,8 +104,8 @@ If this setup is destroyed and recreated the 'munki-s3-rw' policy will need to b
 
 | Name | Version |
 |------|---------|
-| <a name="provider_archive"></a> [archive](#provider\_archive) | n/a |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | n/a |
+| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.1.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.37.0 |
 
 ## Modules
 
@@ -171,6 +171,7 @@ No modules.
 | <a name="input_name"></a> [name](#input\_name) | Name to be used on all resources as the identifier | `string` | `"munki"` | no |
 | <a name="input_s3_bucket_create"></a> [s3\_bucket\_create](#input\_s3\_bucket\_create) | Set to true to create a new s3 bucket. If false you can reuse a current bucket | `bool` | `true` | no |
 | <a name="input_s3_bucket_name"></a> [s3\_bucket\_name](#input\_s3\_bucket\_name) | The s3 bucket name to use | `any` | n/a | yes |
+| <a name="input_s3_encryption_enabled"></a> [s3\_encryption\_enabled](#input\_s3\_encryption\_enabled) | When set to 'true' the resource will have aes256 encryption enabled by default | `bool` | `true` | no |
 | <a name="input_server_side_makecatalogs"></a> [server\_side\_makecatalogs](#input\_server\_side\_makecatalogs) | Set to true to enable server side makecatalogs when s3 bucket changes happen | `bool` | `false` | no |
 | <a name="input_tags"></a> [tags](#input\_tags) | A map of tags to add to all resources | `map(string)` | `{}` | no |
 
