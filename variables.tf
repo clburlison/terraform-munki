@@ -27,6 +27,12 @@ variable "s3_bucket_create" {
   default     = true
 }
 
+variable "s3_encryption_enabled" {
+  type        = bool
+  default     = true
+  description = "When set to 'true' the resource will have aes256 encryption enabled by default"
+}
+
 variable "server_side_makecatalogs" {
   description = "Set to true to enable server side makecatalogs when s3 bucket changes happen"
   default     = false

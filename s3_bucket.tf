@@ -22,10 +22,14 @@ resource "aws_s3_bucket" "munki-bucket" {
     prevent_destroy = false
   }
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "aws:kms"
+  dynamic "server_side_encryption_configuration" {
+    for_each = var.s3_encryption_enabled ? ["true"] : []
+
+    content {
+      rule {
+        apply_server_side_encryption_by_default {
+          sse_algorithm = "AES256"
+        }
       }
     }
   }
