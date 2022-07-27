@@ -104,9 +104,12 @@ resource "aws_cloudfront_distribution" "munki" {
   ordered_cache_behavior {
     path_pattern = "/icons/*"
 
-    lambda_function_association {
-      event_type = "viewer-request"
-      lambda_arn = "${aws_lambda_function.basic_auth_lambda[0].arn}:${aws_lambda_function.basic_auth_lambda[0].version}"
+    dynamic "lambda_function_association" {
+      for_each = var.enable_icons_basic_auth == true ? [1] : []
+      content {
+        event_type   = "viewer-request"
+        lambda_arn   = "${aws_lambda_function.basic_auth_lambda[0].arn}:${aws_lambda_function.basic_auth_lambda[0].version}"
+      }
     }
 
     trusted_signers        = var.cf_trusted_signers
