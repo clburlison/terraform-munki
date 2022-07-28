@@ -105,7 +105,7 @@ resource "aws_cloudfront_distribution" "munki" {
     path_pattern = "/icons/*"
 
     dynamic "lambda_function_association" {
-      for_each = var.enable_icons_basic_auth ? ["true"] : 0
+      for_each = var.enable_icons_basic_auth ? ["true"] : []
       content {
         event_type   = "viewer-request"
         lambda_arn   = "${aws_lambda_function.basic_auth_lambda[0].arn}:${aws_lambda_function.basic_auth_lambda[0].version}"
