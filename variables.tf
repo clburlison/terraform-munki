@@ -140,3 +140,9 @@ variable "icons_ordered_cache_behavior_max_ttl" {
   default     = 60
   description = "The maximum amount of time (in seconds) that a icon object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated."
 }
+
+variable "enable_icons_basic_auth" {
+  type        = bool
+  default     = true
+  description = "When set to 'true' the resource will enable basic auth for icons/ subpath"
+}
