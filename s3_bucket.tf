@@ -31,6 +31,7 @@ resource "aws_s3_bucket" "munki-bucket" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "munki-bucket" {
+  count = var.s3_bucket_create != "false" ? 1 : 0
   bucket = aws_s3_bucket.munki-bucket.bucket
 
   dynamic "s3_encryption_enabled" {
