@@ -22,7 +22,18 @@ resource "aws_s3_bucket" "munki-bucket" {
     prevent_destroy = false
   }
 
-  dynamic "server_side_encryption_configuration" {
+  tags = merge(
+    var.tags,
+    {
+      "Name" = format("%s", var.name)
+    },
+  )
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "munki-bucket" {
+  bucket = aws_s3_bucket.munki-bucket.bucket
+
+  dynamic "s3_encryption_enabled" {
     for_each = var.s3_encryption_enabled ? ["true"] : []
 
     content {
@@ -33,13 +44,6 @@ resource "aws_s3_bucket" "munki-bucket" {
       }
     }
   }
-
-  tags = merge(
-    var.tags,
-    {
-      "Name" = format("%s", var.name)
-    },
-  )
 }
 
 resource "aws_s3_bucket_notification" "bucket_notification" {
