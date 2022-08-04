@@ -13,8 +13,6 @@ data "aws_iam_policy_document" "munki_s3_policy" {
 resource "aws_s3_bucket" "munki-bucket" {
   count  = var.s3_bucket_create != "false" ? 1 : 0
   bucket = var.s3_bucket_name
-  acl    = "private"
-  policy = data.aws_iam_policy_document.munki_s3_policy.json
 
   lifecycle {
     # This can't be interpolationed as a variable. https://github.com/hashicorp/terraform/issues/3116
@@ -30,18 +28,26 @@ resource "aws_s3_bucket" "munki-bucket" {
   )
 }
 
+resource "aws_s3_bucket_acl" "munki-bucket" {
+  bucket = aws_s3_bucket.munki-bucket[0].bucket
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_policy" "munki-bucket" {
+  bucket = aws_s3_bucket.munki-bucket[0].bucket
+  policy = data.aws_iam_policy_document.munki_s3_policy.json
+}
+
 resource "aws_s3_bucket_server_side_encryption_configuration" "munki-bucket" {
   count = var.s3_bucket_create != "false" ? 1 : 0
-  bucket = aws_s3_bucket.munki-bucket.bucket
+  bucket = aws_s3_bucket.munki-bucket[0].bucket
 
-  dynamic "s3_encryption_enabled" {
+  dynamic "rule" {
     for_each = var.s3_encryption_enabled ? ["true"] : []
 
     content {
-      rule {
-        apply_server_side_encryption_by_default {
-          sse_algorithm = "AES256"
-        }
+      apply_server_side_encryption_by_default {
+        sse_algorithm = "AES256"
       }
     }
   }
