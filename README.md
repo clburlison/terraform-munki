@@ -104,8 +104,8 @@ If this setup is destroyed and recreated the 'munki-s3-rw' policy will need to b
 
 | Name | Version |
 |------|---------|
-| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.1.0 |
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 3.37.0 |
+| <a name="provider_archive"></a> [archive](#provider\_archive) | 2.2.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.23.0 |
 
 ## Modules
 
@@ -135,7 +135,10 @@ No modules.
 | [aws_lambda_permission.allow_bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [aws_lambda_permission.allow_cloudwatch](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/lambda_permission) | resource |
 | [aws_s3_bucket.munki-bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket) | resource |
+| [aws_s3_bucket_acl.munki-bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_acl) | resource |
 | [aws_s3_bucket_notification.bucket_notification](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_notification) | resource |
+| [aws_s3_bucket_policy.munki-bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_policy) | resource |
+| [aws_s3_bucket_server_side_encryption_configuration.munki-bucket](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/s3_bucket_server_side_encryption_configuration) | resource |
 | [archive_file.basic_auth_payload](https://registry.terraform.io/providers/hashicorp/archive/latest/docs/data-sources/file) | data source |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_iam_policy_document.lambda_execution_role_assume_role_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/iam_policy_document) | data source |
@@ -162,6 +165,7 @@ No modules.
 | <a name="input_default_cache_behavior_default_ttl"></a> [default\_cache\_behavior\_default\_ttl](#input\_default\_cache\_behavior\_default\_ttl) | The default amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header. | `number` | `86400` | no |
 | <a name="input_default_cache_behavior_max_ttl"></a> [default\_cache\_behavior\_max\_ttl](#input\_default\_cache\_behavior\_max\_ttl) | The maximum amount of time (in seconds) that an object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. | `number` | `31536000` | no |
 | <a name="input_default_cache_behavior_min_ttl"></a> [default\_cache\_behavior\_min\_ttl](#input\_default\_cache\_behavior\_min\_ttl) | The minimum amount of time (in seconds) that you want objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. | `number` | `0` | no |
+| <a name="input_enable_icons_basic_auth"></a> [enable\_icons\_basic\_auth](#input\_enable\_icons\_basic\_auth) | When set to 'true' the resource will enable basic auth for icons/ subpath | `bool` | `true` | no |
 | <a name="input_icons_ordered_cache_behavior_default_ttl"></a> [icons\_ordered\_cache\_behavior\_default\_ttl](#input\_icons\_ordered\_cache\_behavior\_default\_ttl) | The default amount of time (in seconds) that a icon object is in a CloudFront cache before CloudFront forwards another request in the absence of an Cache-Control max-age or Expires header. | `number` | `30` | no |
 | <a name="input_icons_ordered_cache_behavior_max_ttl"></a> [icons\_ordered\_cache\_behavior\_max\_ttl](#input\_icons\_ordered\_cache\_behavior\_max\_ttl) | The maximum amount of time (in seconds) that a icon object is in a CloudFront cache before CloudFront forwards another request to your origin to determine whether the object has been updated. | `number` | `60` | no |
 | <a name="input_icons_ordered_cache_behavior_min_ttl"></a> [icons\_ordered\_cache\_behavior\_min\_ttl](#input\_icons\_ordered\_cache\_behavior\_min\_ttl) | The minimum amount of time (in seconds) that you want icon objects to stay in CloudFront caches before CloudFront queries your origin to see whether the object has been updated. | `number` | `0` | no |
