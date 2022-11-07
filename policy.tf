@@ -27,6 +27,21 @@ resource "aws_iam_policy" "munki-s3-rw" {
         "arn:aws:s3:::${var.s3_bucket_name}/*"
       ]
     }
+  ],
+  "Statement":[
+    {
+      "Effect": "Deny",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::${var.s3_bucket_name}",
+        "arn:aws:s3:::${var.s3_bucket_name}/*"
+      ],
+      "Condition": {
+          "Bool": {
+            "aws:SecureTransport": "false"
+          }
+      }
+    }
   ]
 }
 EOF
