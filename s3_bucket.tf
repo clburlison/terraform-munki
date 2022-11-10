@@ -46,6 +46,14 @@ resource "aws_s3_bucket" "munki-bucket" {
   )
 }
 
+resource "aws_s3_bucket_public_access_block" "munki-bucket" {
+  bucket                  = aws_s3_bucket.munki-bucket[0].id
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
+}
+
 resource "aws_s3_bucket_policy" "munki-bucket" {
   bucket = aws_s3_bucket.munki-bucket[0].bucket
   policy = data.aws_iam_policy_document.munki_s3_policy.json
