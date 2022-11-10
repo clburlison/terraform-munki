@@ -8,6 +8,24 @@ data "aws_iam_policy_document" "munki_s3_policy" {
       identifiers = [aws_cloudfront_origin_access_identity.cf-identity.iam_arn]
     }
   }
+  statement {
+    effect = "Deny"
+    actions = [
+      "s3:*",
+    ]
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+    resources = ["arn:aws:s3:::${var.s3_bucket_name}/*"]
+    condition {
+      test     = "Bool"
+      variable = "aws:SecureTransport"
+      values = [
+        "false"
+      ]
+    }
+  }
 }
 
 resource "aws_s3_bucket" "munki-bucket" {
@@ -26,11 +44,6 @@ resource "aws_s3_bucket" "munki-bucket" {
       "Name" = format("%s", var.name)
     },
   )
-}
-
-resource "aws_s3_bucket_acl" "munki-bucket" {
-  bucket = aws_s3_bucket.munki-bucket[0].bucket
-  acl    = "private"
 }
 
 resource "aws_s3_bucket_policy" "munki-bucket" {
