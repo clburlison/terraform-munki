@@ -62,7 +62,7 @@ resource "aws_lambda_function" "basic_auth_lambda" {
   function_name    = "${var.name}_basic_auth"
   role             = aws_iam_role.lambda_execution_role[0].arn
   handler          = "index.handler"
-  runtime          = "nodejs12.x"
+  runtime          = "nodejs16.x"
   timeout          = "2"
   description      = "Protect munki resources via basic auth."
   publish          = true
@@ -113,7 +113,7 @@ resource "aws_lambda_function" "lambda" {
   function_name    = "munki_makecatalogs"
   role             = aws_iam_role.makecatalogs_lambda[0].arn
   handler          = "lambda_makecatalogs.event_handler"
-  runtime          = "python3.6"
+  runtime          = "python3.9"
   timeout          = "180"
   description      = "Run makecatalogs on the munki repo bucket when a pkginfo or icon item is modified."
 
