@@ -46,6 +46,12 @@ resource "aws_iam_role" "lambda_execution_role" {
   assume_role_policy = data.aws_iam_policy_document.lambda_execution_role_assume_role_policy_document.json
   path               = "/service/"
   description        = "Basic Auth @Edge Lambda Execution Role for munki resources"
+  tags = merge(
+    var.tags,
+    {
+      "Name" = format("%s", var.name)
+    },
+  )
 }
 
 resource "aws_iam_role_policy" "lambda_execution_role_policy" {
@@ -141,6 +147,12 @@ resource "aws_iam_role" "makecatalogs_lambda" {
   count       = var.server_side_makecatalogs ? 1 : 0
   name        = "makecatalogs_lambda"
   description = "Munki makecatalogs"
+  tags = merge(
+    var.tags,
+    {
+      "Name" = format("%s", var.name)
+    },
+  )
 
   assume_role_policy = <<EOF
 {
