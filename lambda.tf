@@ -68,7 +68,7 @@ resource "aws_lambda_function" "basic_auth_lambda" {
   function_name    = "${var.name}_basic_auth"
   role             = aws_iam_role.lambda_execution_role[0].arn
   handler          = "index.handler"
-  runtime          = "nodejs16.x"
+  runtime          = "nodejs20.x"
   timeout          = "2"
   description      = "Protect munki resources via basic auth."
   publish          = true
